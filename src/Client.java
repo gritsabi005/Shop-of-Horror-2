@@ -18,5 +18,9 @@ public class Client {
         amountOfThingsBought = amountOfThingsBought + 1;
         finalPrice = finalPrice + priCe; //Why is it priCe that updates the price? Because this whole line of code will save every price chosen for in the invetory in its (double priCe) variable, that means, double priCe is the one where the computer saves the updated price
     }
+
+    public void endOfPurchase(){
+        System.out.println("You have bought " + getAmountOfThingsBought() + " products, total cost " + getFinalPrice() + " SEK.");
+    }
 }
 
