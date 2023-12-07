@@ -2,30 +2,46 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Client client = new Client(); // You create client instance to put all your shopping inside, more like a shopping cart
-        ShopOfHorror(client); // passing client object to my Product method
+        // The instance of a client is considered to be like a shopping basket based on task description.
+        Client client = new Client();
+        ShopOfHorror(client);
     }
-    // Can be read from CSV instead?
-    static void ShopOfHorror(Client client){ // You declaring a variable name of client from the class Client // three instances in Product
-        ArrayList<Product> list = new ArrayList<Product>();
 
-        list.add(new Discounted("Mask", 235.50, 14, 0.50));
+    static void ShopOfHorror(Client client){
+        // Generating a list with hardcoded products.
+        // No need to give unique variable names to the products,
+        // they will be accessed via their index.
+        ArrayList<Product> list = new ArrayList<>();
+        list.add(new Discounted("Mask (green)", 235.50, 14, 0.50));
+        list.add(new Discounted("Mask (purple)", 235.50, 6, 0.20));
         list.add(new Product("Plastic Knife", 45.50, 3));
-        list.add(new Product("Fake Blood", 89.10, 44));
+        list.add(new Product("Fake Blood", 89.10, 21));
 
+        // the list of items is important for the menu and thus must be sent for smoother process.
         ShowMenu menu = new ShowMenu(list);
 
-        // Calling the shop
-        int menuChoice; // initiated to create the if-statement personalizing the buyers choices
-        do { // This do while will create a stats of each product and will update it after a unit from the stock is taken, until the buyer press 4*, then that will close the shop inventory
-            // *The exit condition may change and be more than 4.
-            // The menu is scalable and outside main method now.
+        int menuChoice;
+        // Show the menu and let the user choose an item until Exit is chosen
+        do {
+            // Call the menu. It is a list with all the items, but it starts from 1
+            // unlike list's indexes which start from 0.
+            System.out.println();
             menu.showMenu();
             Scanner scan = new Scanner(System.in);
-            menuChoice = scan.nextInt();
-            menu.setUserMenuChoice(menuChoice);
-            menu.choiceOptions(client);
+            try{
+                menuChoice = scan.nextInt();
+                menu.setUserMenuChoice(menuChoice);
+                // What will the program's reaction to the user's input be
+                // depends mostly on choiceOptions().
+                menu.choiceOptions(client);
+            } catch (Exception e){
+                System.out.println("\n!!! Invalid menu choice! Please try again.");
+                // In order to keep the program running in case of wrong input,
+                // we want to give menu choice a passing but out of scope value.
+                menuChoice = menu.getMenuOptions() + 1;
+            }
         } while (menuChoice != menu.getMenuOptions());
-        client.endOfPurchase(); // You use get.AmountOfThingsBought() and not original variable amountOfThingsBought because the first one is the one that keeps all the changes in the inventory, and they are declared in class Client
+        // Shows the exit message with purchase info for the client.
+        client.endOfPurchase();
     }
 }

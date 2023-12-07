@@ -1,26 +1,38 @@
 public class Client {
-    private int amountOfThingsBought; // in each these attributes, you will need to declare them into public getters and setters, get for renaming it so that its accessible from outside class to this class, and set is to set a value from this class to outside class
-    private double finalPrice;
-    Client() {
+    private int amountOfThingsBought;
+    private double subTotal;
+    public Client() {
         this.amountOfThingsBought = 0;
-        this.finalPrice = 0.0;
-    }
-    public int getAmountOfThingsBought() { // opens up the private variable above,
-        return this.amountOfThingsBought; // which will also be used in the main method - to save all the chosen items before being purchased
-    }
-    public double getFinalPrice() { // opens up the private variable, which will also be used in the main method to call all the updated price
-        return this.finalPrice;
-    }
-    public void setFinalPrice(double discount){
-        this.finalPrice = discount;
-    }
-    void purchase(double priCe) { // priCe will get the price of each item in merchandise, so that double priCe will refer to price in Product class, and not kund
-        amountOfThingsBought = amountOfThingsBought + 1;
-        finalPrice = finalPrice + priCe; //Why is it priCe that updates the price? Because this whole line of code will save every price chosen for in the invetory in its (double priCe) variable, that means, double priCe is the one where the computer saves the updated price
+        this.subTotal = 0.0;
     }
 
+    // In case of successful purchase increase total bought products
+    // and add the price of the current item to the subTotal. Show a success message and the state of the basket.
+    void purchase(double price) {
+        amountOfThingsBought++;
+        subTotal += price;
+        System.out.printf(
+                "\n===> Successfully added!\nYou currently have %s unit(s) in the basket, for a total cost of %.2f SEK.\n"
+                , getAmountOfThingsBought(), getSubTotal()
+        );
+    }
+
+    // Show the message at the end of the program. In case of purchase or if the used did not purchase products.
     public void endOfPurchase(){
-        System.out.println("You have bought " + getAmountOfThingsBought() + " products, total cost " + getFinalPrice() + " SEK.");
+        if( getAmountOfThingsBought() != 0) {
+            System.out.printf("\n===> You purchased %s product(s), for a total cost of %.2f SEK.\n" +
+                    "The system will now exit.\n", getAmountOfThingsBought(), getSubTotal());
+        } else {
+            System.out.println("\n===> You did not make a purchase today.\nSee you next time!");
+        }
+    }
+
+    public int getAmountOfThingsBought() {
+        return this.amountOfThingsBought;
+    }
+
+    public double getSubTotal() { // opens up the private variable, which will also be used in the main method to call all the updated price
+        return this.subTotal;
     }
 }
 

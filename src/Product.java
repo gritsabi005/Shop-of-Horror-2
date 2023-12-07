@@ -8,21 +8,16 @@ public class Product {
         this.price = price;
         this.stock = stock;
     }
-    public String getName(){return name;}
-    public double getPrice(){return price;}
-    public int getStock(){return stock;}
-    public void setPrice(double price){this.price = price;}
 
-    void inventoryMinusOne() {
-        if (stock > 0) {
-            stock--;
-            // I tried but it only works with stock,
-            // I dont understand though, why can't I use
-            // getStock and have to use its original name stock
-            // if the original is said to be set into private?
-            // Doesnt private mean you have to access it with getters?
-        } else {
-            System.out.println("Sorry, " + name + " is out of stock.");
-        }
+    void reduceStockAfterPurchase() {
+        stock--;
     }
+
+    public int getStock(){return stock;}
+
+    public String getName(){return name;}
+
+    public double getPrice(){return price;}
+
+    public void setPrice(double price){this.price = price;}
 }
