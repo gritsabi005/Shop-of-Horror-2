@@ -12,9 +12,7 @@ public class Product {
     public double getPrice(){return price;}
     public int getStock(){return stock;}
     public void setPrice(double price){this.price = price;}
-    void stats(){
-        System.out.println(getName() + ", " + getPrice() + " SEK, " + getStock() + " left");
-    }
+
     void inventoryMinusOne() {
         if (stock > 0) {
             stock--;

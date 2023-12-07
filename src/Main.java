@@ -12,9 +12,8 @@ public class Main {
         list.add(new Discounted("Mask", 235.50, 14, 0.50));
         list.add(new Product("Plastic Knife", 45.50, 3));
         list.add(new Product("Fake Blood", 89.10, 44));
-        ShowMenu menu = new ShowMenu(list);
 
-        //list.get(0).; // Adding discount to the price of the mask, by 50 percent from the first purchase and thereon
+        ShowMenu menu = new ShowMenu(list);
 
         // Calling the shop
         int menuChoice; // initiated to create the if-statement personalizing the buyers choices
